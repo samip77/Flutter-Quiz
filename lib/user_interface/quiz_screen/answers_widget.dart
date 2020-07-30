@@ -18,6 +18,7 @@ class AnswersWidget extends StatefulWidget {
 
 class _AnswersWidgetState extends State<AnswersWidget> {
   int seeMoreId = -1;
+
   void setSeeMoreId(int index) {
     setState(() {
       if (seeMoreId == index) {

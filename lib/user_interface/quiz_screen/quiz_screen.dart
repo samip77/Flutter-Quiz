@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quiz/blocs/quiz/quiz_event.dart';
+import 'package:flutter_quiz/user_interface/quiz_review/quiz_review_screen.dart';
 import 'package:flutter_quiz/user_interface/widgets/custom_snakbar.dart';
 import 'package:flutter_quiz/user_interface/widgets/rounded_bordered_button.dart';
 import 'package:flutter_quiz/utilities/base_screen.dart';
@@ -21,6 +22,11 @@ class QuizScreen extends BaseStatelessWidget {
         if (state is QuizLoadedState) {
           return _getBody(context, state);
         }
+        if (state is QuizLoadingState) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
         return Center(
           child: Text(state.toString()),
         );
@@ -29,7 +35,9 @@ class QuizScreen extends BaseStatelessWidget {
           CustomSnackbar.showFailed(context, state.message);
         }
         if (state is QuizCompletedState) {
-          CustomSnackbar.showSuccess(context, state.toString());
+          Navigator.of(context).pushNamed(QuizReviewScreen.routeName,
+              arguments:
+                  QuizReviewScreenArguments(state.totalScore, state.questions));
         }
       }),
     );
@@ -55,7 +63,7 @@ class QuizScreen extends BaseStatelessWidget {
     var questionWidget = Padding(
       padding: EdgeInsets.symmetric(vertical: 32),
       child: Text(
-        state.questions[state.currentIndex].description,
+        state.questions[state.currentIndex].question,
         style: TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 18,

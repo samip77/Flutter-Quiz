@@ -64,6 +64,7 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
       }
 
       yield QuizCompletedState(questions: questions, totalScore: total);
+      yield QuizLoadedState(questions: questions, currentIndex: 0);
     }
 
     yield state;

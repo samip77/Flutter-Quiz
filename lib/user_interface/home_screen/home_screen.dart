@@ -21,9 +21,9 @@ class HomeScreen extends BaseStatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Spacer(),
-          _getTitleWidget("Calculate Points"),
+          _getTitleWidget("Points Calculator for Permanent Residency"),
           _getSubtitleWidget(
-              "By answering this 3 mins survey you will know how much points you have aquired.."),
+              "By answering this survey you will know how much points you have aquired.."),
           Spacer(),
           RoundedBorderedButton(
             title: "Continue",
